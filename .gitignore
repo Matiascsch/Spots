@@ -30,3 +30,22 @@ go.work.sum
 # Editor/IDE
 # .idea/
 # .vscode/
+
+
+# NodeJS
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+coverage/
+dist/
+build/
+.next/
+.nuxt/
+out/
+.turbo/
+.cache/
+.parcel-cache/
+.npm
+.eslintcache

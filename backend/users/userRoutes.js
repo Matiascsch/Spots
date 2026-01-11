@@ -1,9 +1,8 @@
 import { Router } from "express";
+import UserHandlers from "./userHandlers.ts";
 
 const usersRouter = Router();
 
-usersRouter.get("/", (req, res) => {
-    res.send("User route works");
-});
+usersRouter.get("/", UserHandlers.getUsers);
 
 export default usersRouter;

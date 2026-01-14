@@ -1,8 +1,11 @@
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import CountrySearch from "./components/CountrySearch";
 import Gallery from "./components/Gallery";
 import Highlights from "./components/Highlights";
 import NavBar from "./components/NavBar";
+import WorldAnimation from "./components/WorldAnimation";
+import SingleCountryView from "./pages/singleCountry/SingleCountryView";
 
 const COUNTRIES = [
   "Argentina",
@@ -75,27 +78,39 @@ const GALLERY_ITEMS = [
   },
 ];
 
-function App() {
+function Home() {
   return (
     <div className="app">
       <header className="hero">
         <NavBar />
 
-        <div className="hero-content">
-          <p className="eyebrow">Turismo curado para viajes memorables</p>
-          <h1>Encontrá el destino perfecto para tu proxima aventura.</h1>
-          <p className="subtitle">
-            Experiencias unicas, estadias boutique y rutas locales con un solo
-            buscador.
-          </p>
+        <div className="hero-grid">
+          <div className="hero-content">
+            <p className="eyebrow">Turismo curado para viajes memorables</p>
+            <h1>Encontr el destino perfecto para tu proxima aventura.</h1>
+            <p className="subtitle">
+              Experiencias unicas, estadias boutique y rutas locales con un solo
+              buscador.
+            </p>
 
-          <CountrySearch countries={COUNTRIES} />
-          <Highlights items={HIGHLIGHTS} />
+            <CountrySearch countries={COUNTRIES} />
+            <Highlights items={HIGHLIGHTS} />
+          </div>
+          <WorldAnimation />
         </div>
       </header>
 
       <Gallery items={GALLERY_ITEMS} />
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/country/:country" element={<SingleCountryView />} />
+    </Routes>
   );
 }
 

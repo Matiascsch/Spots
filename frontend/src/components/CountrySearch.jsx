@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function CountrySearch({
   countries,
@@ -8,6 +9,7 @@ function CountrySearch({
 }) {
   const [query, setQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   const matches = useMemo(() => {
     const trimmed = query.trim().toLowerCase();
@@ -22,6 +24,15 @@ function CountrySearch({
   const handleSelect = (country) => {
     setQuery(country);
     setIsOpen(false);
+  };
+
+  const handleSearch = () => {
+    const trimmed = query.trim();
+    if (!trimmed) {
+      return;
+    }
+    setIsOpen(false);
+    navigate(`/country/${encodeURIComponent(trimmed)}`);
   };
 
   return (
@@ -44,6 +55,12 @@ function CountrySearch({
             onBlur={() => {
               setTimeout(() => setIsOpen(false), 120);
             }}
+            onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                event.preventDefault();
+                handleSearch();
+              }
+            }}
             autoComplete="off"
           />
           <span className="input-icon">Go</span>
@@ -65,7 +82,7 @@ function CountrySearch({
           </div>
         )}
       </div>
-      <button className="search-btn" type="button">
+      <button className="search-btn" type="button" onClick={handleSearch}>
         {buttonText}
       </button>
     </div>

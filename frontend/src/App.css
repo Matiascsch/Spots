@@ -1,19 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Playfair+Display:wght@500;600&display=swap");
 
 :root {
-  --bg: #f5e0cb;
-  --text: #1a1a1a;
-  --muted: #6c6c6c;
-  --accent: #e06b54;
+  --bg: #ffffff;
+  --text: #111111;
+  --muted: #4a4a4a;
+  --accent: #ff5a3c;
   --card: #ffffff;
-  --shadow: 0 18px 40px rgba(19, 16, 14, 0.1);
+  --shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+  --edge: rgba(0, 0, 0, 0.08);
 }
 
 .app {
   min-height: 100vh;
   color: var(--text);
-  background: radial-gradient(circle at top left, #fff8f2, transparent 55%),
-    radial-gradient(circle at 30% 10%, #f1e7de, transparent 40%), var(--bg);
+  background: linear-gradient(90deg, #ffffff 0 75%, #0f0f0f 75% 100%);
   padding: 36px clamp(20px, 5vw, 72px) 64px;
   font-family: "Manrope", sans-serif;
 }
@@ -22,6 +22,8 @@
   display: flex;
   flex-direction: column;
   gap: 80px;
+  position: relative;
+  z-index: 2;
 }
 
 .nav {
@@ -69,6 +71,30 @@
   animation: fadeUp 0.8s ease forwards;
 }
 
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 420px);
+  gap: 32px;
+  align-items: center;
+}
+
+.world-animation {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.world-svg {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+}
+
+.globe-rotate {
+  transform-origin: 400px 230px;
+  animation: globeSpin 18s linear infinite;
+}
+
 .eyebrow {
   text-transform: uppercase;
   letter-spacing: 0.3em;
@@ -97,8 +123,10 @@
   border-radius: 20px;
   background: var(--card);
   box-shadow: var(--shadow);
+  border: 1px solid var(--edge);
   margin-top: 12px;
   position: relative;
+  z-index: 3;
 }
 
 .search-field {
@@ -106,6 +134,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  z-index: 3;
 }
 
 .field-label {
@@ -121,8 +150,8 @@
   width: 100%;
   padding: 14px 40px 14px 16px;
   border-radius: 12px;
-  border: 1px solid #e4ded7;
-  background: #fffdfb;
+  border: 1px solid var(--edge);
+  background: #ffffff;
   font-size: 1rem;
   outline: none;
 }
@@ -148,17 +177,18 @@
   border-radius: 14px;
   background: #ffffff;
   box-shadow: var(--shadow);
+  border: 1px solid var(--edge);
   padding: 10px;
   display: grid;
   gap: 6px;
   max-height: 220px;
   overflow-y: auto;
-  z-index: 99;
+  z-index: 10;
 }
 
 .suggestion {
   border: none;
-  background: #f8f5f2;
+  background: #f1f1f1;
   color: var(--text);
   text-align: left;
   padding: 10px 12px;
@@ -168,7 +198,7 @@
 }
 
 .suggestion:hover {
-  background: #f0e7df;
+  background: #e6e6e6;
 }
 
 .search-btn {
@@ -206,6 +236,27 @@
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 20px;
   animation: fadeUp 0.9s ease 0.2s forwards;
+  position: relative;
+  z-index: 1;
+}
+
+.country-map-section {
+  margin-top: 48px;
+  display: grid;
+  gap: 16px;
+}
+
+.map-title {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(1.4rem, 2vw, 2rem);
+}
+
+.country-map {
+  height: min(60vh, 520px);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--edge);
 }
 
 .card {
@@ -213,6 +264,7 @@
   border-radius: 18px;
   padding: 22px;
   box-shadow: var(--shadow);
+  border: 1px solid var(--edge);
   display: grid;
   gap: 10px;
   min-height: 140px;
@@ -239,6 +291,15 @@
   }
 }
 
+@keyframes globeSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media (max-width: 720px) {
   .nav {
     flex-direction: column;
@@ -256,5 +317,17 @@
 
   .hero {
     gap: 48px;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .world-svg {
+    max-width: 420px;
+  }
+
+  .country-map {
+    height: 360px;
   }
 }
